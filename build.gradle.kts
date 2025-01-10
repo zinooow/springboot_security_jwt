@@ -31,10 +31,10 @@ dependencies {
 
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
-    runtimeOnly("com.h2database:h2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testImplementation("org.springframework.security:spring-security-test")
+    runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
