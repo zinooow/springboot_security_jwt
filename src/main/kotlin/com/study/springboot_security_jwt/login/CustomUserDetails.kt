@@ -13,4 +13,20 @@ class CustomUserDetails(
     override fun getPassword(): String = user.password
 
     override fun getUsername(): String = user.username
+
+    override fun isAccountNonExpired(): Boolean {
+        return super.isAccountNonExpired()
+    }
+
+    override fun isAccountNonLocked(): Boolean {
+        return super.isAccountNonLocked()
+    }
+
+    override fun isCredentialsNonExpired(): Boolean {
+        return super.isCredentialsNonExpired()
+    }
+
+    override fun isEnabled(): Boolean {
+        return super.isEnabled()
+    }
 }

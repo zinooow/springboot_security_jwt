@@ -1,6 +1,7 @@
 package com.study.springboot_security_jwt.config
 
-import com.study.springboot_security_jwt.login.LoginFilter
+import com.study.springboot_security_jwt.jwt.JWTUtil
+import com.study.springboot_security_jwt.jwt.LoginFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
@@ -15,7 +16,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 class SecurityConfig (
-    private val authenticationConfiguration: AuthenticationConfiguration
+    private val authenticationConfiguration: AuthenticationConfiguration,
+    private val jwtUtil: JWTUtil
 ){
 
     @Bean
@@ -32,7 +34,7 @@ class SecurityConfig (
             .sessionManagement { session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             }
-            .addFilterAt(LoginFilter(authenticationManager(authenticationConfiguration)), UsernamePasswordAuthenticationFilter::class.java)
+            .addFilterAt(LoginFilter(authenticationManager(authenticationConfiguration),jwtUtil), UsernamePasswordAuthenticationFilter::class.java)
         return http.build()
     }
 

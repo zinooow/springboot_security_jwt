@@ -1,4 +1,4 @@
-package com.study.springboot_security_jwt.login
+package com.study.springboot_security_jwt.jwt
 
 import io.jsonwebtoken.Jwts
 import org.springframework.beans.factory.annotation.Value
@@ -10,7 +10,7 @@ import javax.crypto.spec.SecretKeySpec
 
 @Component
 class JWTUtil(
-    @Value("\${jwt.secret}")
+    @Value("\${spring.jwt.secret}")
     private val secret: String,
 ) {
     private val secretKey: SecretKey = SecretKeySpec(secret.toByteArray(StandardCharsets.UTF_8), Jwts.SIG.HS256.key().build().algorithm)

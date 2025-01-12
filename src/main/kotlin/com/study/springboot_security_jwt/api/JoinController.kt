@@ -12,7 +12,7 @@ class JoinController (
 ){
 
     @PostMapping("/join")
-    fun join(@RequestBody joinDTO: JoinDTO): String{
+    fun join(joinDTO: JoinDTO): String{
         joinService.join(joinDTO)
         return "${joinDTO.username} OK"
     }
