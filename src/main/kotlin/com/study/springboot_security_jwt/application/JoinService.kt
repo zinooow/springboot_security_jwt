@@ -3,23 +3,24 @@ package com.study.springboot_security_jwt.application
 import com.study.springboot_security_jwt.dto.JoinDTO
 import com.study.springboot_security_jwt.entity.UserEntity
 import com.study.springboot_security_jwt.repository.UserRepository
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.dao.DuplicateKeyException
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
 class JoinService(
     val userRepository: UserRepository,
-    val bCryptPasswordEncoder: BCryptPasswordEncoder,
+    val passwordEncoder: PasswordEncoder,
 ) {
 
     fun join(joinDTO: JoinDTO) {
 
-        if(userRepository.existsByUsername(joinDTO.username)) return
+        if(userRepository.existsByUsername(joinDTO.username)) throw DuplicateKeyException("User Already Exists")
 
         userRepository.save(
             UserEntity(
                 username = joinDTO.username,
-                password = bCryptPasswordEncoder.encode(joinDTO.password),
+                password = passwordEncoder.encode(joinDTO.password),
                 role = "ROLE_USER"
             )
         )
